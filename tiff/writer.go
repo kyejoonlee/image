@@ -288,7 +288,7 @@ type Options struct {
 // Encode writes the image m to w. opt determines the options used for
 // encoding, such as the compression type. If opt is nil, an uncompressed
 // image is written.
-func Encode(w io.Writer, m image.Image, opt *Options) error {
+func Encode(w io.Writer, m image.Image, opt *Options, dpi float64) error {
 	d := m.Bounds().Size()
 
 	compression := uint32(cNone)
@@ -420,8 +420,8 @@ func Encode(w io.Writer, m image.Image, opt *Options) error {
 		{tStripByteCounts, dtLong, []uint32{uint32(imageLen)}},
 		// There is currently no support for storing the image
 		// resolution, so give a bogus value of 72x72 dpi.
-		{tXResolution, dtRational, []uint32{72, 1}},
-		{tYResolution, dtRational, []uint32{72, 1}},
+		{tXResolution, dtRational, []uint32{96, 1}},
+		{tYResolution, dtRational, []uint32{96, 1}},
 		{tResolutionUnit, dtShort, []uint32{resPerInch}},
 	}
 	if pr != prNone {
