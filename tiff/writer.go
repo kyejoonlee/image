@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"compress/zlib"
 	"encoding/binary"
+	"fmt"
 	"image"
 	"io"
 	"sort"
@@ -424,6 +425,7 @@ func Encode(w io.Writer, m image.Image, opt *Options, dpi float64) error {
 		{tYResolution, dtRational, []uint32{96, 1}},
 		{tResolutionUnit, dtShort, []uint32{resPerInch}},
 	}
+	fmt.Println(ifd)
 	if pr != prNone {
 		ifd = append(ifd, ifdEntry{tPredictor, dtShort, []uint32{pr}})
 	}
